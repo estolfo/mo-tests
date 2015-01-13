@@ -1,3 +1,13 @@
+#A. Write
+#         Setup:
+#          - Servers:
+#             - serverA: standalone
+#          - Op: Insert
+#
+#1. Description: standalone available
+#               (mo step) server started
+#               * Op succeeds
+
 description: "Successful read from standalone"
 
 setup: {

@@ -1,3 +1,27 @@
+#A. Removal of members and addition of primary:
+#                Setup
+#             - Servers:
+#                    - serverA
+#                    - serverB
+#                    - serverC
+#                    - serverD
+#                    - serverE
+#                 - Op: findOne
+#                 - URI: mongodb://serverA_host:serverA_port/?replicaSet=rs
+#                 - MOConfig actions: [
+#                    1. create RS with config { members: serverA, serverB, serverC },
+#                    ]
+#
+#
+#1. Description: Ensure that client detects changes in the replica set
+#                    (test step) client with URI
+#                    (mo step) stop serverA
+#                    (mo step) add serverD to RS set
+#                    (mo step) add serverE to RS set
+#                    * Ensure that client reports serverB, serverC, serverD, serverE in topology
+#                    * Ensure that client does not report serverA in topology
+
+
 description: "Client detects changes in replica set"
 
 setup: {
@@ -49,6 +73,8 @@ phases: [
                                           rel-link: "get-server-info" }
                              },
                              { request: { method: "POST",
+                                          # The respose from the previous request should be the source for
+                                          # the relative link "server-command"
                                           rel-link: "server-command",
                                           payload: { action: "stop" } }
                              }]
