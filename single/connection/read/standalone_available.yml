@@ -1,0 +1,25 @@
+description: "Successful read from standalone"
+
+setup: {
+          MO-requests: [
+                        { method: "POST",
+                          uri: "/servers",
+                          body: {
+                                   name: "mongod",
+                                   procParams: { journal: true }
+                          }
+                        }],
+          uriReferenceInResponse: &uriReferenceInResponse "mongodb_uri",
+          setUpOperation: {
+                             action: "insert",
+                             doc: { x: 1 }
+                          },
+          clientUri: { base: *uriReferenceInResponse },
+        }
+
+phases: [
+          {
+            operation: "findOne",
+            outcome: { ok: 1 }
+          }
+]
