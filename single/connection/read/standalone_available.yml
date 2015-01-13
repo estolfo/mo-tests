@@ -4,9 +4,9 @@ setup: {
           MO-requests: [
                         { method: "POST",
                           uri: "/servers",
-                          body: {
-                                   name: "mongod",
-                                   procParams: { journal: true }
+                          paylod: {
+                                    name: "mongod",
+                                    procParams: { journal: true }
                           }
                         }],
           uriReferenceInResponse: &uriReferenceInResponse "mongodb_uri",
@@ -17,9 +17,9 @@ setup: {
           clientUri: { base: *uriReferenceInResponse },
         }
 
-phases: [
+tests: [
           {
             operation: "findOne",
             outcome: { ok: 1 }
           }
-]
+       ]
