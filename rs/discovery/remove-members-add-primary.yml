@@ -25,50 +25,49 @@
 description: "Client detects changes in replica set"
 
 setup: {
-          MO-requests: [{ request: { method: "POST",
-                                     uri: "replica_sets",
-                                     payload: { members: [
-                                                    {
-                                                        procParams: {
-                                                            nohttpinterface: true,
-                                                            journal: true,
-                                                            noprealloc: true,
-                                                            nssize: 1,
-                                                            oplogSize: 150,
-                                                            smallfiles: true
-                                                        }
-                                                    },
-                                                    {
-                                                        procParams: {
-                                                            nohttpinterface: true,
-                                                            journal: true,
-                                                            noprealloc: true,
-                                                            nssize: 1,
-                                                            oplogSize: 150,
-                                                            smallfiles: true
-                                                        }
-                                                    },
-                                                    {
-                                                        procParams: {
-                                                            nohttpinterface: true,
-                                                            journal: true,
-                                                            noprealloc: true,
-                                                            nssize: 1,
-                                                            oplogSize: 150,
-                                                            smallfiles: true
-                                                        }
-                                                    }
-                                                ]
+          MO-requests: [{ method: "POST",
+                          uri: "replica_sets",
+                          payload: { members: [
+                                         {
+                                             procParams: {
+                                                 nohttpinterface: true,
+                                                 journal: true,
+                                                 noprealloc: true,
+                                                 nssize: 1,
+                                                 oplogSize: 150,
+                                                 smallfiles: true
+                                             }
+                                         },
+                                         {
+                                              procParams: {
+                                                  nohttpinterface: true,
+                                                  journal: true,
+                                                  noprealloc: true,
+                                                  nssize: 1,
+                                                  oplogSize: 150,
+                                                  smallfiles: true
                                               }
-
-                        } }],
+                                          },
+                                          {
+                                              procParams: {
+                                                  nohttpinterface: true,
+                                                  journal: true,
+                                                  noprealloc: true,
+                                                  nssize: 1,
+                                                  oplogSize: 150,
+                                                  smallfiles: true
+                                              }
+                                          }
+                                      ]
+                                    }
+                        }],
           uriReferenceInResponse: &uriReferenceInResponse "mongodb_uri",
           clientUri: { base: *uriReferenceInResponse },
         }
 
 phases: [
           {
-            mo-operations: [ { member: 0,
+            MO-operations: [ { member: 0,
                                request: { method: "GET",
                                           rel-link: "get-server-info" }
                              },
@@ -84,7 +83,7 @@ phases: [
             outcome: { ok: 1 }
           },
           {
-            mo-operations: [ { request: { method: "POST",
+            MO-operations: [ { request: { method: "POST",
                                           uri: "/members",
                                           paylod: { rsParams: { priority: 1 } }
                                         }
