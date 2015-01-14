@@ -16,14 +16,13 @@ init_config: { procParams: { journal: true } }
 
 uriOptions: {}
 
-setup: {
-          operations: [
-                       {
-                         action: "insertOne",
-                         doc: { x: 1 }
-                        }
-                      ]
-        }
+setup: [
+         {
+           action: "insertOne",
+           doc: { x: 1 }
+          }
+        ]
+        
 
 phases: [
           {

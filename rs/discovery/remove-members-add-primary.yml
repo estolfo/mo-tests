@@ -62,7 +62,7 @@ init_config: { members: [
 
 uriOptions: {}
 
-setup: {}
+setup: []
 
 phases: [
           {
