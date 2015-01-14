@@ -10,26 +10,28 @@
 
 description: "Successful read from standalone"
 
+type: "standalone"
+
+init_config: { procParams: { journal: true } }
+
+uriOptions: {}
+
 setup: {
-          MO-requests: [
-                        { method: "POST",
-                          uri: "/servers",
-                          paylod: {
-                                    name: "mongod",
-                                    procParams: { journal: true }
-                          }
-                        }],
-          uriReferenceInResponse: &uriReferenceInResponse "mongodb_uri",
-          setUpOperation: {
-                             action: "insert",
-                             doc: { x: 1 }
-                          },
-          clientUri: { base: *uriReferenceInResponse },
+          operations: [
+                       {
+                         action: "insertOne",
+                         doc: { x: 1 }
+                        }
+                      ]
         }
 
-tests: [
+phases: [
           {
-            operation: "findOne",
-            outcome: { ok: 1 }
+            tests: [
+                    {
+                      operation: "findOne",
+                      outcome: { ok: 1 }
+                    }
+                  ]
           }
-       ]
+        ]

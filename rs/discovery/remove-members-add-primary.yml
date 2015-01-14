@@ -24,48 +24,47 @@
 
 description: "Client detects changes in replica set"
 
-setup: {
-          MO-requests: [{ method: "POST",
-                          uri: "replica_sets",
-                          payload: { members: [
-                                         {
-                                             procParams: {
-                                                 nohttpinterface: true,
-                                                 journal: true,
-                                                 noprealloc: true,
-                                                 nssize: 1,
-                                                 oplogSize: 150,
-                                                 smallfiles: true
-                                             }
-                                         },
-                                         {
-                                              procParams: {
-                                                  nohttpinterface: true,
-                                                  journal: true,
-                                                  noprealloc: true,
-                                                  nssize: 1,
-                                                  oplogSize: 150,
-                                                  smallfiles: true
-                                              }
-                                          },
-                                          {
-                                              procParams: {
-                                                  nohttpinterface: true,
-                                                  journal: true,
-                                                  noprealloc: true,
-                                                  nssize: 1,
-                                                  oplogSize: 150,
-                                                  smallfiles: true
-                                              }
-                                          }
-                                      ]
-                                    }
-                        }],
-          uriReferenceInResponse: &uriReferenceInResponse "mongodb_uri",
-          clientUri: { base: *uriReferenceInResponse },
-        }
+type: "replica_sets"
 
-steps: [
+init_config: { members: [
+                         {
+                             procParams: {
+                                 nohttpinterface: true,
+                                 journal: true,
+                                 noprealloc: true,
+                                 nssize: 1,
+                                 oplogSize: 150,
+                                 smallfiles: true
+                             }
+                         },
+                         {
+                              procParams: {
+                                  nohttpinterface: true,
+                                  journal: true,
+                                  noprealloc: true,
+                                  nssize: 1,
+                                  oplogSize: 150,
+                                  smallfiles: true
+                              }
+                          },
+                          {
+                              procParams: {
+                                  nohttpinterface: true,
+                                  journal: true,
+                                  noprealloc: true,
+                                  nssize: 1,
+                                  oplogSize: 150,
+                                  smallfiles: true
+                              }
+                          }
+                        ]
+            }
+
+uriOptions: {}
+
+setup: {}
+
+phases: [
           {
             MO-operations: [ { member: 0,
                                request: { method: "GET",
@@ -79,24 +78,26 @@ steps: [
                              }]
           },
           {
-            operation: "findOne",
-            outcome: { ok: 1 }
+            client-operations: [
+                                {
+                                  action: "insertOne",
+                                  doc: { x: 1 }
+                                }
+                               ]
           },
           {
-            MO-operations: [ { request: { method: "POST",
-                                          uri: "/members",
-                                          paylod: { rsParams: { priority: 1 } }
-                                        }
+            MO-operations: [ { method: "POST",
+                               uri: "/members",
+                               paylod: { rsParams: { priority: 1 } }
                              },
-                             { request: { method: "POST",
-                                          uri: "/members",
-                                          paylod: { rsParams: { priority: 0 } }
-                                        }
+                             { method: "POST",
+                               uri: "/members",
+                               paylod: { rsParams: { priority: 0 } }
                              }]
+          },
+          {
+            tests: [
+                    { members: [ 1, 2, 3, 4 ] }
+                   ]
           }
         ]
-tests: [
-          { members: [ 1, 2, 3, 4 ] }
-       ]
-
-
