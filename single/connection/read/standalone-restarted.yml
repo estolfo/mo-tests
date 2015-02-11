@@ -1,0 +1,48 @@
+#3. Description: standalone not available, then restarted
+#                 (mo step) server started
+#                 * Op succeeds
+#                 (mo step) server stopped
+#                 * Op fails
+#                 (mo step) server restarted
+#                 * Op succeeds
+
+description: "Successful read from restarted standalone"
+
+type: "Standalone"
+
+initConfig: { id: "serverA" }
+
+phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 }
+                             }
+          }
+
+          {
+            MOOperation: { method: "POST",
+                            uri: "/servers/serverA",
+                            payload: { action: "stop" }
+                          }
+          },
+
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 0 }
+                              }
+          },
+          
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "restart" }
+                         }
+          }
+        ]
+
+tests: [
+          {
+            operation: "findOne",
+            outcome: { ok: 1 }
+          }
+        ]

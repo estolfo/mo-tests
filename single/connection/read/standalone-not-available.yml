@@ -1,0 +1,31 @@
+#2. Description: standalone not available
+#                (mo step) server stopped
+#                * Op fails
+
+description: "Read failure when standlone is not available"
+
+type: "Standalone"
+
+initConfig: { id: "serverA" }
+
+phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 }
+                              }
+          }
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "stop" }
+                          }
+          }
+         ]
+
+tests: [
+          {
+            operation: "findOne",
+            outcome: { ok: 0 }
+          }
+        ]        

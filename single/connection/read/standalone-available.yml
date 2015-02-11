@@ -1,0 +1,30 @@
+#A. Write
+#         Setup:
+#          - Servers:
+#             - serverA: standalone
+#          - Op: Insert
+#
+#1. Description: standalone available
+#               (mo step) server started
+#               * Op succeeds
+
+description: "Successful read from standalone"
+
+type: "Standalone"
+
+initConfig: { id: "serverA" }
+
+phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 }
+                             }
+          }
+        ]
+
+tests: [
+          {
+            operation: "findOne",
+            outcome: { ok: 1 }
+          }
+        ]          

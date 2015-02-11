@@ -9,8 +9,10 @@
 #                 - Op: findOne
 #                 - URI: mongodb://serverA_host:serverA_port/?replicaSet=rs
 #                 - MOConfig actions: [
-#                    1. create RS with config { members: serverA, serverB, serverC },
-#                    ]
+#                                        1. create RS with config { replicaSet name: rs, 
+#                                                                             members: serverA, serverB, serverC },
+#                    2. create server: serverD,
+#                                         3. create server: serverE ]
 #
 #
 #1. Description: Ensure that client detects changes in the replica set
@@ -24,41 +26,15 @@
 
 description: "Client detects changes in replica set"
 
-type: "replica_sets"
+type: "ReplicaSet"
 
-init_config: { members: [
-                         {
-                             procParams: {
-                                 nohttpinterface: true,
-                                 journal: true,
-                                 noprealloc: true,
-                                 nssize: 1,
-                                 oplogSize: 150,
-                                 smallfiles: true
-                             }
-                         },
-                         {
-                              procParams: {
-                                  nohttpinterface: true,
-                                  journal: true,
-                                  noprealloc: true,
-                                  nssize: 1,
-                                  oplogSize: 150,
-                                  smallfiles: true
-                              }
-                          },
-                          {
-                              procParams: {
-                                  nohttpinterface: true,
-                                  journal: true,
-                                  noprealloc: true,
-                                  nssize: 1,
-                                  oplogSize: 150,
-                                  smallfiles: true
-                              }
-                          }
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA" },
+                         { server_id: "serverB" },
+                         { server_id: "serverC" }                         
                         ]
-            }
+             }
 
 uriOptions: {}
 
@@ -66,38 +42,31 @@ setup: []
 
 phases: [
           {
-            MO-operations: [ { member: 0,
-                               request: { method: "GET",
-                                          rel-link: "get-server-info" }
-                             },
-                             { request: { method: "POST",
-                                          # The respose from the previous request should be the source for
-                                          # the relative link "server-command"
-                                          rel-link: "server-command",
-                                          payload: { action: "stop" } }
-                             }]
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "stop" }
+                         }
           },
+
           {
-            client-operations: [
-                                {
-                                  action: "insertOne",
-                                  doc: { x: 1 }
-                                }
-                               ]
+            MOOperation:
+                         { method: "POST",
+                           uri: "/replica_sets/integration_tests/members",
+                           payload: { server_id: "serverD" }
+                         }
           },
+
           {
-            MO-operations: [ { method: "POST",
-                               uri: "/members",
-                               paylod: { rsParams: { priority: 1 } }
-                             },
-                             { method: "POST",
-                               uri: "/members",
-                               paylod: { rsParams: { priority: 0 } }
-                             }]
-          },
-          {
-            tests: [
-                    { members: [ 1, 2, 3, 4 ] }
-                   ]
+            MOOperation:
+                         { method: "POST",
+                           uri: "/replica_sets/integration_tests/members",
+                           payload: { server_id: "serverE" }
+                         }
           }
         ]
+
+tests: [
+         {
+           members: [ "serverB", "serverC", "serverD", "serverE" ]
+         }
+       ]
