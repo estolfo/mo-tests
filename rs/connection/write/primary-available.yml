@@ -1,0 +1,29 @@
+#1. Description: Primary is available
+#                     * Op succeeds
+
+description: "Successul write to an available primary"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA" },
+                         { server_id: "serverB" },
+                         { server_id: "serverC" }                         
+                        ]
+             }
+
+options: {}
+
+setup: []
+
+phases: []
+
+tests: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]

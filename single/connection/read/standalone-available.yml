@@ -1,12 +1,7 @@
-#A. Write
-#         Setup:
-#          - Servers:
-#             - serverA: standalone
-#          - Op: Insert
-#
 #1. Description: standalone available
-#               (mo step) server started
-#               * Op succeeds
+#                (mo step) server started
+#                * Op succeeds
+#
 
 description: "Successful read from standalone"
 
@@ -24,7 +19,8 @@ phases: [
 
 tests: [
           {
-            operation: "findOne",
-            outcome: { ok: 1 }
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 1 }
+                             }
           }
         ]          

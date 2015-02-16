@@ -1,0 +1,3 @@
+#2. Description: Query with primary stopped
+#                    (mo step) stop serverA
+#                    * Op fails

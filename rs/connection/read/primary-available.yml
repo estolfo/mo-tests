@@ -1,0 +1,28 @@
+#1. Description: primary is available
+#                     * Op succeeds
+
+description: "Successul read from an available primary"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA" },
+                         { server_id: "serverB" },
+                         { server_id: "serverC" }                         
+                        ]
+             }
+
+options: {}
+
+setup: []
+
+phases: []
+
+tests: [
+          {
+            clientOperation: { operation: "findOne"
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]

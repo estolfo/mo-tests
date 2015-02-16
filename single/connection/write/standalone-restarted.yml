@@ -6,7 +6,7 @@
 #                 (mo step) server restarted
 #                 * Op succeeds
 
-description: "Successful read from restarted standalone"
+description: "Successful write to a restarted standalone"
 
 type: "Standalone"
 
@@ -15,7 +15,8 @@ initConfig: { id: "serverA" }
 phases: [
           {
             clientOperation: { operation: "insertOne",
-                               doc: { x: 1 }
+                               doc: { x: 1 },
+                               outcome: { ok: 1 }
                              }
           }
 
@@ -27,9 +28,10 @@ phases: [
           },
 
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 2 },
                                outcome: { ok: 0 }
-                              }
+                             }
           },
           
           {
@@ -42,8 +44,9 @@ phases: [
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 3 },
                                outcome: { ok: 1 }
-                              }
+                             }
           }
-        ]
+        ] 

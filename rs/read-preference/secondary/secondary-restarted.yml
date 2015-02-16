@@ -1,0 +1,5 @@
+#3. Description: Query with secondary stopped, then restarted
+#                    (mo step) stop serverB
+#                    * Op fails
+#                    (mo step) restart serverB
+#                    * Op goes to serverB

@@ -36,9 +36,7 @@ initConfig: { id: "integration_tests",
                         ]
              }
 
-uriOptions: {}
-
-setup: []
+options: {}
 
 phases: [
           {
@@ -67,6 +65,7 @@ phases: [
 
 tests: [
          {
-           members: [ "serverB", "serverC", "serverD", "serverE" ]
+           state:
+                  { members: [ "serverB", "serverC", "serverD", "serverE" ] }
          }
        ]

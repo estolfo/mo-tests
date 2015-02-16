@@ -1,0 +1,5 @@
+#3. Description: Query with primary stopped, then restarted
+#                    (mo step) stop serverA
+#                    * Op fails
+#                    (mo step) restart serverA
+#                    * Op goes to serverA (with retries)#

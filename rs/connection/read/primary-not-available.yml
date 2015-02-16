@@ -1,0 +1,36 @@
+#2. Description: primary is not available
+#                    * Op fails
+
+description: "Read failure when primary is not available"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA",
+                           rsParams: { priority: 1 } },
+                         { server_id: "serverB"
+                           rsParams: { priority: 0 } },
+                         { server_id: "serverC"
+                           rsParams: { priority: 0 } }                   
+                        ]
+             }
+
+options: {}
+
+phases: [
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "stop" }
+                          }
+          }
+         ]]
+
+tests: [
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 0 }
+                             }
+          }
+        ]

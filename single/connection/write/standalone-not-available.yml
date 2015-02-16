@@ -2,19 +2,13 @@
 #                (mo step) server stopped
 #                * Op fails
 
-description: "Read failure when standlone is not available"
+description: "Write failure when standlone is not available"
 
 type: "Standalone"
 
 initConfig: { id: "serverA" }
 
 phases: [
-          {
-            clientOperation: { operation: "insertOne",
-                               doc: { x: 1 }
-                              }
-          }
-
           {
             MOOperation: { method: "POST",
                            uri: "/servers/serverA",
@@ -25,8 +19,9 @@ phases: [
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
                                outcome: { ok: 0 }
-                              }
+                             }
           }
-        ]        
+        ]

@@ -1,0 +1,18 @@
+#1. Description: standalone available
+#               (mo step) server started
+#               * Op succeeds
+#
+description: "Successful write to a standalone"
+
+type: "Standalone"
+
+initConfig: { id: "serverA" }
+
+tests: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]
