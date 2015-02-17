@@ -48,7 +48,7 @@ phases: [
                            uri: "/replica_sets/integration_tests/members",
                            payload: { server_id: "serverD" }
                          }
-          }
+          },
 
           {
             wait: 1

@@ -29,7 +29,7 @@ initConfig: { id: "integration_tests",
               members: [
                          { server_id: "serverA" },
                          { server_id: "serverB" },
-                         { server_id: "serverC"
+                         { server_id: "serverC",
                            rsParams: { arbiterOnly: true } }                   
                         ]
              }

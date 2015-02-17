@@ -21,7 +21,7 @@ phases: [
             clientOperation: { operation: "insertOne",
                                doc: { x: 1 }
                              }
-          }
+          },
 
           {
             MOOperation: { method: "POST",

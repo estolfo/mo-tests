@@ -22,7 +22,7 @@ phases: [
                                doc: { x: 1 },
                                outcome: { ok: 1 }
                              }
-          }
+          },
 
           {
             MOOperation: { method: "POST",
