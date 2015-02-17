@@ -16,9 +16,6 @@ initConfig: { id: "integration_tests",
                            rsParams: { arbiterOnly: true } }                   
                         ]
              }
-clientOptions: {
-                { readPreference: { mode: 'primary' } }
-               }
 
 clientSetUp: {
                 hosts: [ "serverA", "serverB", "serverC" ],
