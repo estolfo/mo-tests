@@ -1,0 +1,12 @@
+# TODO: How to define caching members and comparing?
+
+#1. Description: Ensure that client detects primary failure and new elected member
+#                    (test step) client with URI
+#                    (mo step) cache primary
+#                    (mo step) cache secondaries
+#                    (mo step) stop primary
+#                    * Op fails
+#                    (mo step) get primary
+#                    (mo step) get secondaries
+#                    * Ensure that client primary != MO previous primary
+#                    * Ensure that client secondary != MO previous secondaries

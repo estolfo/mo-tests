@@ -1,0 +1,50 @@
+# TODO: How to define running replSetMaintenance on serverB?
+
+#E. Parse server errors
+#                Setup
+#                - Servers:
+#                    - serverA, priority 1
+#                    - serverB, priority 0
+#                    - serverC, arbiter
+#     - Op1: findOne
+#     - Op2: insert
+#     - MOConfig actions: [
+#                           1. create RS with config { replicaSet name: rs, 
+#                                                      members: serverA, serverB, serverC } ]
+#                 - URI1: mongodb://user:passwd@serverA_host/?replicaSet=rs&readPreference=PRIMARY
+#                 - URI2: mongodb://user:passwd@serverA_host/?replicaSet=rs&readPreference=SECONDARY
+#             
+#1. Description: Check that a recovering member triggers a refresh
+#                    (test step) create client with URI2
+#                    (mo step) Run replSetMaintenance command on serverB
+#                    * Op1 fails
+#                    (test step) wait 1 second
+#                    * Op2 succeeds
+
+description: "A recovering member triggers a refresh"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA" },
+                         { server_id: "serverB" },
+                         { server_id: "serverC"
+                           rsParams: { arbiterOnly: true } }                   
+                        ]
+             }
+
+clientHosts: [ "serverA" ]
+
+clientOptions: {
+                 readPreference: { mode: 'secondary' },
+                 heartbeatFrequency: 1
+               }
+
+phases: [
+          {
+            clientOperation: { operation: "command",
+                               doc: { replSetMaintenance: 1 }
+                             }
+          }
+        ]

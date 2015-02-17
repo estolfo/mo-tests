@@ -1,0 +1,49 @@
+#3. Description: Ensure that client detects primary stepdown
+#                    (mo step) send command replSetStepDown
+#                    * insertOne fails
+#                    (test step) wait
+#                    * insertOne succeeds
+
+description: "Client detects primary stepdown"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA" },
+                         { server_id: "serverB" },
+                         { server_id: "serverC" }
+                        ]
+            }
+
+clientOptions: {
+                 heartbeatFrequency: 2
+               }
+
+phases: [
+          {
+            clientOperation: { operation: "command",
+                               doc: { replSetStepDown: 1 }
+                             }
+          },
+
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               outcome: { ok: 0 }
+                             }
+          },
+
+          {
+            wait: 2
+          }
+        ]
+
+tests: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 2 },
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]
