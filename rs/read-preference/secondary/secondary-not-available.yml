@@ -1,7 +1,8 @@
-#1. Description: primary is available
-#                     * Op succeeds
+#2. Description: Query with secondary stopped
+#                    (mo step) stop serverB
+#                    * Op fails
 
-description: "Successul read from an available primary"
+description: "Read failure when secondary is not available"
 
 type: "ReplicaSet"
 
@@ -16,21 +17,30 @@ initConfig: { id: "integration_tests",
                         ]
              }
 
-clientOptions: {}
+clientOptions: {
+                { readPreference: { mode: 'secondary' } }
+               }
 
 phases: [
           {
             clientOperation: { operation: "insertOne",
                                doc: { x: 1 },
-                               outcome: { ok: 1 }
+                               writeConcern: { w: 3 }
                              }
-          }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverB",
+                           payload: { action: "stop" }
+                         }
+          },
         ]
 
 tests: [
           {
-            clientOperation: { operation: "findOne"
-                               outcome: { ok: 1 }
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 0 }
                              }
           }
         ]

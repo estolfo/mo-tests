@@ -3,3 +3,59 @@
 #                    * Op fails
 #                    (mo step) restart serverB
 #                    * Op goes to serverB
+
+description: "Successful read from restarted secondary"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA",
+                           rsParams: { priority: 1 } },
+                         { server_id: "serverB"
+                           rsParams: { priority: 0 } },
+                         { server_id: "serverC"
+                           rsParams: { arbiterOnly: true } }                   
+                        ]
+             }
+
+clientOptions: {
+                { readPreference: { mode: 'secondary' } }
+               }
+
+phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               writeConcern: { w: 3 }
+                             }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverB",
+                           payload: { action: "stop" }
+                         }
+          },
+
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 0 }
+                             }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverB",
+                           payload: { action: "restart" }
+                         }
+          }
+        ]
+
+tests: [
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]

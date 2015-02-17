@@ -17,13 +17,20 @@ initConfig: { id: "integration_tests",
                          { server_id: "serverB"
                            rsParams: { priority: 0 } },
                          { server_id: "serverC"
-                           rsParams: { priority: 0 } }                   
+                           rsParams: { arbiterOnly: true } }                   
                         ]
-             }
+            }
 
-options: {}
+clientOptions: {}
 
 phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               outcome: { ok: 0 }
+                             }
+          },
+
           {
             MOOperation: { method: "POST",
                            uri: "/servers/serverA",
