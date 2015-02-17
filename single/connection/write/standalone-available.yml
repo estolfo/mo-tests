@@ -8,6 +8,10 @@ type: "Standalone"
 
 initConfig: { id: "serverA" }
 
+clientSetUp: {
+                hosts: [ "serverA" ],
+             }
+
 tests: [
           {
             clientOperation: { operation: "insertOne",

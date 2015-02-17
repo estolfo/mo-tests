@@ -9,6 +9,10 @@ type: "Standalone"
 
 initConfig: { id: "serverA" }
 
+clientSetUp: {
+                hosts: [ "serverA" ],
+             }
+
 phases: [
           {
             clientOperation: { operation: "insertOne",

@@ -20,6 +20,13 @@ clientOptions: {
                 { readPreference: { mode: 'primary' } }
                }
 
+clientSetUp: {
+                hosts: [ "serverA", "serverB", "serverC" ],
+                options: {
+                           readPreference: { mode: 'primary' }
+                         }
+             }
+
 phases: [
           {
             clientOperation: { operation: "insertOne",

@@ -1,0 +1,10 @@
+# TODO: Ask Luke about minimal sharded cluster setup
+
+#1. Description: Both mongos’ available
+#                    * findOne succeeds
+
+description: "Successul read with all mongos' available"
+
+type: "Sharded"
+
+initConfig: { }

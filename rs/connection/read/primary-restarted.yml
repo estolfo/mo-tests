@@ -21,7 +21,10 @@ initConfig: { id: "integration_tests",
                         ]
             }
 
-clientOptions: {}
+clientSetUp: {
+                hosts: [ "serverA", "serverB", "serverC" ],
+                options: {}
+             }
 
 phases: [
           {

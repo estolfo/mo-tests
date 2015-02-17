@@ -1,0 +1,3 @@
+#2. Description: One mongos not available
+#                    (mo step) serverA stopped
+#                    * findOne succeeds

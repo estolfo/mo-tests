@@ -1,0 +1,3 @@
+#3. Description: No mongos’ available
+#                    (mo step) serverA and serverB stopped
+#                    * Op fails

@@ -16,9 +16,12 @@ initConfig: { id: "integration_tests",
                         ]
             }
 
-clientOptions: {
-                 heartbeatFrequency: 2
-               }
+clientSetUp: {
+                hosts: [ "serverA", "serverB", "serverC" ],
+                options: {
+                           heartbeatFrequency: 2
+                         }
+             }
 
 phases: [
           {

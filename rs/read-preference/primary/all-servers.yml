@@ -16,9 +16,12 @@ initConfig: { id: "integration_tests",
                         ]
              }
 
-clientOptions: {
-                { readPreference: { mode: 'primary' } }
-               }
+clientSetUp: {
+                hosts: [ "serverA", "serverB", "serverC" ],
+                options: {
+                           readPreference: { mode: 'primary' }
+                         }
+             }
 
 phases: [
           {

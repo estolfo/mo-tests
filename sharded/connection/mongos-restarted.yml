@@ -1,0 +1,5 @@
+#4. Description: One mongos stopped, then restarted
+#                    (mo step) serverA stopped
+#                    * Op succeeds
+#                    (mo step) serverA restarted
+#                    * Op succeeds

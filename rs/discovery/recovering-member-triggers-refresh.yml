@@ -36,10 +36,13 @@ initConfig: { id: "integration_tests",
 
 clientHosts: [ "serverA" ]
 
-clientOptions: {
-                 readPreference: { mode: 'secondary' },
-                 heartbeatFrequency: 1
-               }
+clientSetUp: {
+                hosts: [ "serverA", "serverB", "serverC" ],
+                options: {
+                           readPreference: { mode: 'secondary' },
+                           heartbeatFrequency: 1
+                         }
+             }
 
 phases: [
           {
