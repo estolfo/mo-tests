@@ -25,9 +25,10 @@ clientSetUp: {
 
 phases: [
           {
-            clientOperation: { operation: "command",
-                               doc: { replSetStepDown: 1 }
-                             }
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "stepdown" }
+                          }
           },
 
           {
