@@ -1,7 +1,7 @@
 #1. Description: primary is available
 #                     * Op succeeds
 
-description: "Successul read from an available primary"
+description: "Successful read from an available primary"
 
 type: "ReplicaSet"
 

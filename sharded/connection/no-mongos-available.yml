@@ -1,3 +1,52 @@
 #3. Description: No mongos’ available
 #                    (mo step) serverA and serverB stopped
 #                    * Op fails
+
+description: "Read failure when neither mongos' are available
+
+type: "Sharded"
+
+initConfig: { id: "integration_tests",
+              routers: [
+                         { server_id: "mongosA"},
+                         { server_id: "mongosB" }
+                       ]
+            }
+
+clientSetUp: {
+                hosts: [ "mongosA", "mongosB" ],
+                options: {
+                           heartbeatFrequency: 1
+                         }
+             }
+
+phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               outcome: { ok: 1 }
+                             }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/mongosA",
+                           payload: { action: "stop" }
+                          }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/mongosB",
+                           payload: { action: "stop" }
+                          }
+          }
+        ]
+
+tests: [
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 0 }
+                             }
+          }
+        ]

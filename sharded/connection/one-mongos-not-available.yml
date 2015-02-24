@@ -1,3 +1,45 @@
 #2. Description: One mongos not available
 #                    (mo step) serverA stopped
 #                    * findOne succeeds
+
+description: "Successful read with one mongos not available"
+
+type: "Sharded"
+
+initConfig: { id: "integration_tests",
+              routers: [
+                         { server_id: "mongosA"},
+                         { server_id: "mongosB" }
+                       ]
+            }
+
+clientSetUp: {
+                hosts: [ "mongosA", "mongosB" ],
+                options: {
+                           heartbeatFrequency: 1
+                         }
+             }
+
+phases: [
+          {
+            clientOperation: { operation: "insertOne",
+                               doc: { x: 1 },
+                               outcome: { ok: 1 }
+                             }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/mongosA",
+                           payload: { action: "stop" }
+                          }
+          }
+        ]
+
+tests: [
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]

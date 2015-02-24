@@ -31,7 +31,8 @@ phases: [
             MOOperation:
                          { method: "POST",
                            uri: "/replica_sets/integration_tests/members",
-                           payload: { server_id: "serverC" }
+                           payload: { server_id: "serverC",
+                                      rsParams: { priority: 1 } },
                          }
           },
 
@@ -46,7 +47,8 @@ phases: [
             MOOperation:
                          { method: "POST",
                            uri: "/replica_sets/integration_tests/members",
-                           payload: { server_id: "serverD" }
+                           payload: { server_id: "serverD",
+                                      rsParams: { priority: 0 } },
                          }
           },
 
@@ -68,6 +70,7 @@ phases: [
 
 tests: [
          {
-           clientHosts: [ "serverC", "serverD" ]
+           clientHosts: { primary: "serverC",
+                          secondaries: [ "serverD" ] }
          }
        ]

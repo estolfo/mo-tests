@@ -3,8 +3,26 @@
 #1. Description: Both mongos’ available
 #                    * findOne succeeds
 
-description: "Successul read with all mongos' available"
+description: "Successful read with all mongos' available"
 
 type: "Sharded"
 
-initConfig: { }
+initConfig: { id: "integration_tests",
+              routers: [
+                         { server_id: "mongosA"},
+                         { server_id: "mongosB" }
+                       ]
+            }
+
+clientSetUp: {
+                hosts: [ "mongosA", "mongosB" ],
+                options: {}
+             }
+
+tests: [
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 1 }
+                             }
+          }
+        ]

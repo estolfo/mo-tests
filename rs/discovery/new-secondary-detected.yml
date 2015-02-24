@@ -1,12 +1,57 @@
-# TODO: How to define caching members and comparing?
-
 #2. Description: Ensure that client detects secondary failure and new elected member
 #                     (test step) client with URI
 #                    (mo step) cache primary
 #                    (mo step) cache secondaries
 #                    (mo step) stop secondary
-#                    * Op fails
+#                    * Op succeeds
 #                    (mo step) get primary
 #                    (mo step) get secondaries
 #                    * Ensure that client previous primary == MO previous primary
 #                    * Ensure that client secondaries != MO previous secondaries
+
+description: "Client detects secondary failure and newly elected members"
+
+type: "ReplicaSet"
+
+initConfig: { id: "integration_tests",
+              members: [
+                         { server_id: "serverA" },
+                         { server_id: "serverB" },
+                         { server_id: "serverC" }
+                        ]
+            }
+
+clientSetUp: {
+                hosts: [ "serverA", "serverB", "serverC" ],
+                options: {
+                           readPreference: { mode: 'secondary' }
+                         }
+             }
+
+phases: [
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 1 }
+                             }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverB",
+                           payload: { action: "stop" }
+                          }
+          },
+
+          {
+            clientOperation: { operation: "findOne",
+                               outcome: { ok: 1 }
+                             }
+          },
+        ]
+
+tests: [
+         {
+           clientHosts: { primary: "serverA",
+                          secondaries: [ "serverC" ] }
+         }
+       ]
