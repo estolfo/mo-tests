@@ -4,7 +4,7 @@
 #                    (mo step) restart serverB
 #                    * Op goes to serverB
 
-description: "Successful read from restarted secondary"
+description: "Successful read with secondary read preference from restarted secondary"
 
 type: "ReplicaSet"
 

@@ -1,7 +1,7 @@
 #1. Description: Query with all servers available
 #                    * Op goes to serverA
 
-description: "Successful read with all servers available"
+description: "Successful read with primary read preference and all servers available"
 
 type: "ReplicaSet"
 

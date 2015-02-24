@@ -2,7 +2,7 @@
 #                    (mo step) stop serverB
 #                    * Op fails
 
-description: "Read failure when secondary is not available"
+description: "Read failure with secondary read preference and secondary is not available"
 
 type: "ReplicaSet"
 

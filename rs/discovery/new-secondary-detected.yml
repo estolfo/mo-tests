@@ -15,11 +15,14 @@ type: "ReplicaSet"
 
 initConfig: { id: "integration_tests",
               members: [
-                         { server_id: "serverA" },
-                         { server_id: "serverB" },
-                         { server_id: "serverC" }
+                         { server_id: "serverA",
+                           rsParams: { priority: 2 } },
+                         { server_id: "serverB",
+                           rsParams: { priority: 1 } },
+                         { server_id: "serverC",
+                           rsParams: { priority: 0 } }
                         ]
-            }
+             }
 
 clientSetUp: {
                 hosts: [ "serverA", "serverB", "serverC" ],

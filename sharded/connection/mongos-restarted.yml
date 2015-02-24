@@ -4,6 +4,8 @@
 #                    (mo step) serverA restarted
 #                    * Op succeeds
 
+description: "Successful read from restarted mongos"
+
 type: "Sharded"
 
 initConfig: { id: "integration_tests",

@@ -4,7 +4,7 @@
 #                    (mo step) restart serverA
 #                    * Op goes to serverA (with retries)
 
-description: "Successful read from restarted primary"
+description: "Successful read with primary read preference from restarted primary"
 
 type: "ReplicaSet"
 
@@ -52,6 +52,10 @@ phases: [
                            uri: "/servers/serverA",
                            payload: { action: "restart" }
                          }
+          }
+
+          {
+            wait: 3
           }
         ]
 

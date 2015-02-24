@@ -1,6 +1,11 @@
 #1. Description: Query with all servers available
 #                    * Op goes to serverB
 
+
+description: "Successful read with secondary read preference and all servers available"
+
+type: "ReplicaSet"
+
 initConfig: { id: "integration_tests",
               members: [
                          { server_id: "serverA",

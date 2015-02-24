@@ -24,7 +24,7 @@
 #                    * Ensure that client does not report serverA in topology
 
 
-description: "Client detects changes in replica set"
+description: "Client detects new primary"
 
 type: "ReplicaSet"
 
@@ -67,7 +67,7 @@ phases: [
             MOOperation:
                          { method: "POST",
                            uri: "/replica_sets/integration_tests/members",
-                           payload: { server_id: "serverD",
+                           payload: { server_id: "serverE",
                                       rsParams: { priority: 0 } },
                          }
           },
@@ -79,7 +79,7 @@ phases: [
 
 tests: [
          {
-           clientHosts: { primary: "serverB",
-                          secondaries: [ "serverC", "serverD", "serverE" ] }
+           clientHosts: { primary: "serverD",
+                          secondaries: [ "serverB", "serverC", "serverE" ] }
          }
        ]
