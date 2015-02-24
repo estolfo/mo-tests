@@ -50,7 +50,7 @@ phases: [
 
           {
             wait: 3
-          }
+          },
 
           {
             clientOperation: { operation: "findOne",

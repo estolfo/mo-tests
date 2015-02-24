@@ -2,7 +2,7 @@
 #                    (mo step) serverA and serverB stopped
 #                    * Op fails
 
-description: "Read failure when neither mongos' are available
+description: "Read failure when neither mongos' are available"
 
 type: "Sharded"
 
