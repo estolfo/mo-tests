@@ -20,6 +20,7 @@ phases: [
           {
             clientOperation: { operation: "insertOne",
                                doc: { x: 1 }
+                               outcome: { ok: 1 }
                              }
           },
 
