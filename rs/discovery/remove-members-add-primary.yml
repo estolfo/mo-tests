@@ -40,7 +40,7 @@ initConfig: { id: "integration_tests",
              }
 
 clientSetUp: {
-                hosts: [ "serverA", "serverB" ],
+                hosts: [ "serverA", "serverB", "serverC" ],
                 options: {
                            heartbeatFrequency: 1
                          }
