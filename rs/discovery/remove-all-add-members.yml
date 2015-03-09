@@ -10,7 +10,7 @@
 
 description: "Client detects changes in replica set"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

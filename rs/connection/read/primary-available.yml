@@ -3,7 +3,7 @@
 
 description: "Successful read from an available primary"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

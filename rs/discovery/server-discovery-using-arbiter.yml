@@ -14,7 +14,7 @@
 
 description: "Client uses arbiter to discover all members"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

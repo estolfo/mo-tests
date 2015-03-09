@@ -6,7 +6,7 @@
 
 description: "Successful read with secondary read preference from restarted secondary"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

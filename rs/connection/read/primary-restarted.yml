@@ -8,7 +8,7 @@
 
 description: "Successful read from a restarted primary"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

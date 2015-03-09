@@ -14,7 +14,7 @@
 
 description: "Client detects primary failure and newly elected members"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

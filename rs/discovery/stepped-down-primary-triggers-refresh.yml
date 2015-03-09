@@ -7,7 +7,7 @@
 
 description: "A stepped-down primary triggers a refresh"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

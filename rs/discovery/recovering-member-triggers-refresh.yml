@@ -20,7 +20,7 @@
 
 description: "A recovering member triggers a refresh"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

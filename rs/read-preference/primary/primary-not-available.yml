@@ -4,7 +4,7 @@
 
 description: "Read failure with primary read preference and primary is not available"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

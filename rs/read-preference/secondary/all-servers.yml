@@ -4,7 +4,7 @@
 
 description: "Successful read with secondary read preference and all servers available"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

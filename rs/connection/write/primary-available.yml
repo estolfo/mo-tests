@@ -3,7 +3,7 @@
 
 description: "Successful write to an available primary"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

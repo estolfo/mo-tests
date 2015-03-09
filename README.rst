@@ -18,7 +18,7 @@ A description of the test.
 type
 ~~~~~~
 
-The type of the test is "Standalone", "ReplicaSet", or "Sharded".
+The type of the test is "servers", "replica_sets", or "sharded_clusters". This can be used in the Mongo Orchestration setup URL.
 
 initConfig
 ~~~~~~~~~~~

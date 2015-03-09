@@ -4,7 +4,7 @@
 #
 description: "Successful write to a standalone"
 
-type: "Standalone"
+type: "servers"
 
 initConfig: { id: "serverA" }
 

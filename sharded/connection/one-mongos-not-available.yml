@@ -4,7 +4,7 @@
 
 description: "Successful read with one mongos not available"
 
-type: "Sharded"
+type: "sharded_clusters"
 
 initConfig: { id: "integration_tests",
               routers: [

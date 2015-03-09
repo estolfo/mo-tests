@@ -4,7 +4,7 @@
 
 description: "Write failure when primary is not available"
 
-type: "ReplicaSet"
+type: "replica_sets"
 
 initConfig: { id: "integration_tests",
               members: [

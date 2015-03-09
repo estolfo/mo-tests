@@ -8,7 +8,7 @@
 
 description: "Successful write to a restarted standalone"
 
-type: "Standalone"
+type: "servers"
 
 initConfig: { id: "serverA" }
 
