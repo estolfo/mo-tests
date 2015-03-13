@@ -10,7 +10,7 @@ initConfig: { id: "integration_tests",
               routers: [
                          { server_id: "mongosA" },
                          { server_id: "mongosB" }
-                       ]
+                       ],
               shards: [
                         { id: "sh1" }
                       ]

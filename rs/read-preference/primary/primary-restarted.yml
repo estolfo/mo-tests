@@ -52,7 +52,7 @@ phases: [
                            uri: "/servers/serverA",
                            payload: { action: "restart" }
                          }
-          }
+          },
 
           {
             wait: 3
