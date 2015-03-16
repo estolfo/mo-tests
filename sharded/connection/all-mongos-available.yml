@@ -1,7 +1,7 @@
 # TODO: Ask Luke about minimal sharded cluster setup
 
 #1. Description: Both mongos’ available
-#                    * findOne succeeds
+#                    * find succeeds
 
 description: "Successful read with all mongos' available"
 
@@ -24,7 +24,7 @@ clientSetUp: {
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 1 }
                              }
           }

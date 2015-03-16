@@ -6,7 +6,7 @@
 #                    - serverC
 #                    - serverD
 #                    - serverE
-#                 - Op: findOne
+#                 - Op: find
 #                 - URI: mongodb://serverA_host:serverA_port/?replicaSet=rs
 #                 - MOConfig actions: [
 #                                        1. create RS with config { replicaSet name: rs, 

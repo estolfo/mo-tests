@@ -1,7 +1,7 @@
 #2. Description: Check that a stepped-down primary triggers a refresh
 #                    (test step) create client with URI1
 #                    (test step) Run replSetStepDown command
-#                    * findOne fails
+#                    * find fails
 #                    (test step) wait 1 second
 #                    * insert succeeds
 
@@ -37,7 +37,7 @@ phases: [
           },
 
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 0 }
                              }
           },

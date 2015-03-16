@@ -4,7 +4,7 @@
 #                    - serverA, priority 1
 #                    - serverB, priority 0
 #                    - serverC, arbiter
-#     - Op1: findOne
+#     - Op1: find
 #     - Op2: insert
 #     - MOConfig actions: [
 #                           1. create RS with config { replicaSet name: rs, 
@@ -48,7 +48,7 @@ phases: [
           },
 
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 0 }
                              }
           },
@@ -60,7 +60,7 @@ phases: [
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 1 }
                              }
           }

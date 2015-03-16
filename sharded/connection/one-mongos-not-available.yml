@@ -1,6 +1,6 @@
 #2. Description: One mongos not available
 #                    (mo step) serverA stopped
-#                    * findOne succeeds
+#                    * find succeeds
 
 description: "Successful read with one mongos not available"
 
@@ -41,7 +41,7 @@ phases: [
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 1 }
                              }
           }

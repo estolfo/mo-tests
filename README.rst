@@ -67,8 +67,8 @@ A clientOperation is an operation that should be executed using the client insta
 - doc (optional)
 - outcome
 
-The document will have an operation of type 'insertOne' or 'findOne'.
-An 'insertOne' operation will have a key 'doc', supplying a document to be inserted. A 'findOne' operation will not have this key.
+The document will have an operation of type 'insertOne' or 'find'.
+An 'insertOne' operation will have a key 'doc', supplying a document to be inserted. A 'find' operation will not have this key.
 
 The 'outcome' doc has either a 1 or 0 value for 'ok'. This describes whether the operation is expected to be a success or failure. This is not the test assertion but if this step fails, the test can be aborted.
 

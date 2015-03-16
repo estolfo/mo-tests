@@ -35,7 +35,7 @@ phases: [
           },
 
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 0 }
                              }
           },
@@ -50,7 +50,7 @@ phases: [
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 1 }
                              }
           }

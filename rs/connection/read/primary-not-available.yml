@@ -30,16 +30,15 @@ phases: [
           },
 
           {
-            MOOperation: { method: "POST",
+            MOOperation: { method: "DELETE",
                            uri: "/servers/serverA",
-                           payload: { action: "stop" }
                           }
           }
         ]
 
 tests: [
           {
-            clientOperation: { operation: "findOne",
+            clientOperation: { operation: "find",
                                outcome: { ok: 0 }
                              }
           }
