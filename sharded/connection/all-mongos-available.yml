@@ -22,6 +22,8 @@ clientSetUp: {
                 options: {}
              }
 
+phases: []
+
 tests: [
           {
             clientOperation: { operation: "find",

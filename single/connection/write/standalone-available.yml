@@ -12,6 +12,8 @@ clientSetUp: {
                 hosts: [ "serverA" ],
              }
 
+phases: []
+
 tests: [
           {
             clientOperation: { operation: "insertOne",
