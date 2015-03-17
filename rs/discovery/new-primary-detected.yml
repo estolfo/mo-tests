@@ -30,7 +30,8 @@ initConfig: { id: "integration_tests",
 clientSetUp: {
                 hosts: [ "serverA", "serverB", "serverC" ],
                 options: {
-                           readPreference: { mode: 'primary' }
+                           readPreference: { mode: 'primary' },
+                           heartbeatFrequency: 2
                          }
              }
 
