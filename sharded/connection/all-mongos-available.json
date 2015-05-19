@@ -1,0 +1,37 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "mongosA", 
+            "mongosB"
+        ], 
+        "options": {}
+    }, 
+    "description": "Successful read with all mongos' available", 
+    "initConfig": {
+        "id": "integration_tests", 
+        "routers": [
+            {
+                "server_id": "mongosA"
+            }, 
+            {
+                "server_id": "mongosB"
+            }
+        ], 
+        "shards": [
+            {
+                "id": "sh1"
+            }
+        ]
+    }, 
+    "tests": [
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "type": "sharded_clusters"
+}

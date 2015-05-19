@@ -1,0 +1,35 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverA"
+        ]
+    }, 
+    "description": "Successful read from standalone", 
+    "initConfig": {
+        "id": "serverA"
+    }, 
+    "phases": [
+        {
+            "clientOperation": {
+                "doc": {
+                    "x": 1
+                }, 
+                "operation": "insertOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "tests": [
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "type": "servers"
+}

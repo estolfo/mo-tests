@@ -1,0 +1,61 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverA"
+        ]
+    }, 
+    "description": "Successful read from restarted standalone", 
+    "initConfig": {
+        "id": "serverA"
+    }, 
+    "phases": [
+        {
+            "clientOperation": {
+                "doc": {
+                    "x": 1
+                }, 
+                "operation": "insertOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }, 
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "stop"
+                }, 
+                "uri": "/servers/serverA"
+            }
+        }, 
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 0
+                }
+            }
+        }, 
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "restart"
+                }, 
+                "uri": "/servers/serverA"
+            }
+        }
+    ], 
+    "tests": [
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "type": "servers"
+}

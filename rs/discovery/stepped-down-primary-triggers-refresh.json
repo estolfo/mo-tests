@@ -1,0 +1,75 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverA", 
+            "serverB", 
+            "serverC"
+        ], 
+        "options": {
+            "heartbeatFrequency": 1, 
+            "readPreference": {
+                "mode": "primary"
+            }
+        }
+    }, 
+    "description": "A stepped-down primary triggers a refresh", 
+    "initConfig": {
+        "id": "integration_tests", 
+        "members": [
+            {
+                "rsParams": {
+                    "priority": 2
+                }, 
+                "server_id": "serverA"
+            }, 
+            {
+                "rsParams": {
+                    "priority": 1
+                }, 
+                "server_id": "serverB"
+            }, 
+            {
+                "rsParams": {
+                    "arbiterOnly": true
+                }, 
+                "server_id": "serverC"
+            }
+        ]
+    }, 
+    "phases": [
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "stepdown"
+                }, 
+                "uri": "/servers/serverA"
+            }
+        }, 
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 0
+                }
+            }
+        }, 
+        {
+            "wait": 1
+        }
+    ], 
+    "tests": [
+        {
+            "clientOperation": {
+                "doc": {
+                    "x": 1
+                }, 
+                "operation": "insertOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "type": "replica_sets"
+}

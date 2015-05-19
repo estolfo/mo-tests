@@ -1,0 +1,61 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "mongosA", 
+            "mongosB"
+        ], 
+        "options": {
+            "heartbeatFrequency": 1
+        }
+    }, 
+    "description": "Successful read with one mongos not available", 
+    "initConfig": {
+        "id": "integration_tests", 
+        "routers": [
+            {
+                "server_id": "mongosA"
+            }, 
+            {
+                "server_id": "mongosB"
+            }
+        ], 
+        "shards": [
+            {
+                "id": "sh1"
+            }
+        ]
+    }, 
+    "phases": [
+        {
+            "clientOperation": {
+                "doc": {
+                    "x": 1
+                }, 
+                "operation": "insertOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }, 
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "stop"
+                }, 
+                "uri": "/servers/mongosA"
+            }
+        }
+    ], 
+    "tests": [
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "type": "sharded_clusters"
+}
