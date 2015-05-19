@@ -1,0 +1,66 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverA", 
+            "serverB", 
+            "serverC"
+        ], 
+        "options": {
+            "heartbeatFrequency": 1, 
+            "readPreference": {
+                "mode": "secondary"
+            }
+        }
+    }, 
+    "description": "A recovering member triggers a refresh", 
+    "initConfig": {
+        "id": "integration_tests", 
+        "members": [
+            {
+                "server_id": "serverA"
+            }, 
+            {
+                "server_id": "serverB"
+            }, 
+            {
+                "rsParams": {
+                    "arbiterOnly": true
+                }, 
+                "server_id": "serverC"
+            }
+        ]
+    }, 
+    "phases": [
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "restart"
+                }, 
+                "uri": "/servers/serverB"
+            }
+        }, 
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 0
+                }
+            }
+        }, 
+        {
+            "wait": 1
+        }
+    ], 
+    "tests": [
+        {
+            "clientOperation": {
+                "operation": "findOne", 
+                "outcome": {
+                    "ok": 1
+                }
+            }
+        }
+    ], 
+    "type": "replica_sets"
+}

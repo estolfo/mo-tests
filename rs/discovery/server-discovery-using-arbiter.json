@@ -1,0 +1,50 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverC"
+        ], 
+        "options": {
+            "heartbeatFrequency": 1
+        }
+    }, 
+    "description": "Client uses arbiter to discover all members", 
+    "initConfig": {
+        "id": "integration_tests", 
+        "members": [
+            {
+                "rsParams": {
+                    "priority": 1
+                }, 
+                "server_id": "serverA"
+            }, 
+            {
+                "rsParams": {
+                    "priority": 0
+                }, 
+                "server_id": "serverB"
+            }, 
+            {
+                "rsParams": {
+                    "arbiterOnly": true
+                }, 
+                "server_id": "serverC"
+            }
+        ]
+    }, 
+    "phases": [
+        {
+            "wait": 1
+        }
+    ], 
+    "tests": [
+        {
+            "clientHosts": {
+                "primary": "serverA", 
+                "secondaries": [
+                    "serverB"
+                ]
+            }
+        }
+    ], 
+    "type": "replica_sets"
+}

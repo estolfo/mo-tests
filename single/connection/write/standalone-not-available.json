@@ -1,0 +1,36 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverA"
+        ]
+    }, 
+    "description": "Write failure when standlone is not available", 
+    "initConfig": {
+        "id": "serverA"
+    }, 
+    "phases": [
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "stop"
+                }, 
+                "uri": "/servers/serverA"
+            }
+        }
+    ], 
+    "tests": [
+        {
+            "clientOperation": {
+                "doc": {
+                    "x": 1
+                }, 
+                "operation": "insertOne", 
+                "outcome": {
+                    "ok": 0
+                }
+            }
+        }
+    ], 
+    "type": "servers"
+}

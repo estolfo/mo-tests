@@ -1,0 +1,84 @@
+{
+    "clientSetUp": {
+        "hosts": [
+            "serverA", 
+            "serverB"
+        ], 
+        "options": {
+            "heartbeatFrequency": 1
+        }
+    }, 
+    "description": "Client detects changes in replica set", 
+    "initConfig": {
+        "id": "integration_tests", 
+        "members": [
+            {
+                "server_id": "serverA"
+            }, 
+            {
+                "server_id": "serverB"
+            }
+        ]
+    }, 
+    "phases": [
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "rsParams": {
+                        "priority": 1
+                    }, 
+                    "server_id": "serverC"
+                }, 
+                "uri": "/replica_sets/integration_tests/members"
+            }
+        }, 
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "stop"
+                }, 
+                "uri": "/servers/serverA"
+            }
+        }, 
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "rsParams": {
+                        "priority": 0
+                    }, 
+                    "server_id": "serverD"
+                }, 
+                "uri": "/replica_sets/integration_tests/members"
+            }
+        }, 
+        {
+            "wait": 1
+        }, 
+        {
+            "MOOperation": {
+                "method": "POST", 
+                "payload": {
+                    "action": "stop"
+                }, 
+                "uri": "/servers/serverB"
+            }
+        }, 
+        {
+            "wait": 1
+        }
+    ], 
+    "tests": [
+        {
+            "clientHosts": {
+                "primary": "serverC", 
+                "secondaries": [
+                    "serverD"
+                ]
+            }
+        }
+    ], 
+    "type": "replica_sets"
+}
