@@ -30,7 +30,7 @@ phases: [
           {
             clientOperation: { operation: "insertOne",
                                doc: { x: 1 },
-                               writeConcern: { w: 3 }
+                               writeConcern: { w: 2 }
                              }
           },
 
