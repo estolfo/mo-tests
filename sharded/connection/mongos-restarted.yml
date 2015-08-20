@@ -45,6 +45,13 @@ phases: [
                            uri: "/servers/mongosA",
                            payload: { action: "restart" }
                          }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/mongosA",
+                           payload: { action: "reset" }
+                         }
           }
         ]
 

@@ -55,6 +55,13 @@ phases: [
           },
 
           {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "reset" }
+                         }
+          },
+
+          {
             wait: 3
           }
         ]
