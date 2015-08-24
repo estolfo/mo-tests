@@ -19,7 +19,7 @@ clientSetUp: {
 phases: [
           {
             clientOperation: { operation: "insertOne",
-                               doc: { x: 1 }
+                               doc: { x: 1 },
                                outcome: { ok: 1 }
                              }
           },
@@ -41,6 +41,13 @@ phases: [
             MOOperation: { method: "POST",
                            uri: "/servers/serverA",
                            payload: { action: "restart" }
+                         }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/serverA",
+                           payload: { action: "reset" }
                          }
           }
         ]

@@ -12,7 +12,7 @@ initConfig: { id: "integration_tests",
               routers: [
                          { server_id: "mongosA" },
                          { server_id: "mongosB" }
-                       ]
+                       ],
               shards: [
                         { id: "sh1" }
                       ]
@@ -44,6 +44,13 @@ phases: [
             MOOperation: { method: "POST",
                            uri: "/servers/mongosA",
                            payload: { action: "restart" }
+                         }
+          },
+
+          {
+            MOOperation: { method: "POST",
+                           uri: "/servers/mongosA",
+                           payload: { action: "reset" }
                          }
           }
         ]
